@@ -24,9 +24,16 @@ nli_model = load_nli_model()
 _ = nli_model("Warmup headline", text_pair="Warmup trusted article")  # warm-up
 
 # -----------------------------
-# Load spaCy for entity extraction
 # -----------------------------
-nlp = spacy.load("en_core_web_sm")
+# Load spaCy for entity extraction (with fallback)
+# -----------------------------
+import subprocess, sys
+
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    subprocess.run([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
+    nlp = spacy.load("en_core_web_sm")
 
 # -----------------------------
 # Cache trusted articles
