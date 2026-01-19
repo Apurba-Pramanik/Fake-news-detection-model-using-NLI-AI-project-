@@ -274,7 +274,12 @@ with col2:
                     st.markdown(f"- **{trusted}**  \n   Similarity: `{sim:.2f}` | Contradiction: `{contra_score:.2f}`")
             else:
                 st.info("No related matches found.")
-
+# Sidebar cache control
+with st.sidebar:
+    if st.button("Clear Cache"):
+        st.cache_data.clear()
+        st.cache_resource.clear()
+        st.success("✅ Cache cleared! Please rerun the app.")
 # Footer
 st.markdown("<hr>", unsafe_allow_html=True)
 #st.markdown("<p style='text-align:center; color:grey;'>Built with ❤️ using Streamlit</p>", unsafe_allow_html=True)
